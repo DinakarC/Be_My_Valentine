@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Proposal</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: pink;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+            padding: 10px;
+        }
+        h1 {
+            margin-top: -30px;
+            font-size: 24px;
+        }
+        .buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+        #yes {
+            background-color: lightgreen;
+        }
+        #no {
+            background-color: lightcoral;
+            white-space: nowrap;
+        }
+        #initial-animation, #animation {
+            margin-top: 10px;
+            width: 150px;
+            height: 150px;
+        }
+        #animation {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 20px;
+            }
+            .buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+            button {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 id="question">Will you be my Valentine?</h1>
+    <img id="initial-animation" src="https://i.pinimg.com/originals/52/37/c3/5237c33065a69a734309974a8b7f029b.gif" alt="Cute Animation">
+    <div class="buttons">
+        <button id="yes">Yes</button>
+        <button id="no">No</button>
+    </div>
+    <img id="animation" src="https://media.tenor.com/F2SQcVd5fMIAAAAi/hug-couple.gif" alt="Couple Kissing Animation">
+
+    <script>
+        let noClickCount = 0;
+        const yesButton = document.getElementById("yes");
+        const noButton = document.getElementById("no");
+        const animation = document.getElementById("animation");
+        const initialAnimation = document.getElementById("initial-animation");
+        const questionText = document.getElementById("question");
+
+        const noMessages = [
+            "Are you sure?",
+            "Naa olle hudgaa",
+            "Nijvaglu olle hudga",
+            "One last chance kodthini!",
+            "Final No?"
+        ];
+        
+        noButton.addEventListener("click", () => {
+            if (noClickCount < noMessages.length) {
+                noButton.textContent = noMessages[noClickCount];
+                noButton.style.width = `${noButton.scrollWidth - 10}px`;
+                noButton.style.height = `${noButton.scrollHeight - 5}px`;
+                noButton.style.fontSize = `${parseInt(window.getComputedStyle(noButton).fontSize) - 2}px`;
+            }
+            noClickCount++;
+            yesButton.style.fontSize = `${18 + noClickCount * 10}px`;
+            yesButton.style.padding = `${20 + noClickCount * 2}px ${40 + noClickCount * 4}px`;
+            yesButton.style.width = `${100 + noClickCount * 20}px`;
+            yesButton.style.height = `${50 + noClickCount * 10}px`;
+            
+            if (noClickCount >= 6) {
+                yesButton.style.position = "absolute";
+                yesButton.style.top = "50%";
+                yesButton.style.left = "50%";
+                yesButton.style.transform = "translate(-50%, -50%)";
+                yesButton.style.width = "100vw";
+                yesButton.style.height = "100vh";
+                yesButton.style.fontSize = "50px";
+                yesButton.textContent = "TM opko";
+                noButton.style.display = "none";
+            }
+        });
+
+        yesButton.addEventListener("click", () => {
+            if (noClickCount >= 6) {
+                yesButton.style.display = "none";
+                animation.style.display = "block";
+                initialAnimation.style.display = "none";
+                questionText.textContent = "loooooooovvvvveeeeee ewwwwwwwwww ttttoooooooooo";
+            }
+        });
+    </script>
+</body>
+</html>
