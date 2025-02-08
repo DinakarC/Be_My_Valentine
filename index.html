@@ -33,6 +33,7 @@
             border: none;
             cursor: pointer;
             transition: all 0.3s ease-in-out;
+            color: white;
         }
         #yes {
             background-color: lightgreen;
@@ -122,12 +123,10 @@
         });
 
         yesButton.addEventListener("click", () => {
-            if (noClickCount >= 6) {
-                yesButton.style.display = "none";
-                animation.style.display = "block";
-                initialAnimation.style.display = "none";
-                questionText.textContent = "loooooooovvvvveeeeee ewwwwwwwwww ttttoooooooooo";
-            }
+            yesButton.style.display = "none";
+            animation.style.display = "block";
+            initialAnimation.style.display = "none";
+            questionText.textContent = "loooooooovvvvveeeeee ewwwwwwwwww ttttoooooooooo";
         });
     </script>
 </body>
